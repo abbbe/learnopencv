@@ -1,6 +1,7 @@
 import cv2
 import time
 import numpy as np
+import sys
 
 
 protoFile = "hand/pose_deploy.prototxt"
@@ -11,7 +12,7 @@ POSE_PAIRS = [ [0,1],[1,2],[2,3],[3,4],[0,5],[5,6],[6,7],[7,8],[0,9],[9,10],[10,
 threshold = 0.2
 
 
-input_source = "asl.mp4"
+input_source = sys.argv[1]
 cap = cv2.VideoCapture(input_source)
 hasFrame, frame = cap.read()
 
