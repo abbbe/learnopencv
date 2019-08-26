@@ -24,6 +24,9 @@ aspect_ratio = frameWidth/frameHeight
 inHeight = 368
 inWidth = int(((aspect_ratio*inHeight)*8)//8)
 
+cv2.namedWindow('Output-Skeleton', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('image', inHeight, inWidth)
+
 vid_writer = cv2.VideoWriter('output.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 15, (frame.shape[1],frame.shape[0]))
 
 net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
@@ -36,6 +39,8 @@ while 1:
     if not hasFrame:
         cv2.waitKey()
         break
+
+    if k % 10 != 0: continue
 
     inpBlob = cv2.dnn.blobFromImage(frame, 1.0 / 255, (inWidth, inHeight),
                               (0, 0, 0), swapRB=False, crop=False)
